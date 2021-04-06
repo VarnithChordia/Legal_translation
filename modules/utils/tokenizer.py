@@ -5,29 +5,39 @@ import torch
 
 
 
-class BPETokenizer:
-    def __init__(self,file_prefix,
-                 additional_tokens,
-                 num_symbols,
-                 total_symbols,
-                 min_frequency,
-                 separator,
-                 **kwargs):
-        super(BPETokenizer, self).__init__(file_prefix=file_prefix,
-                                           additional_tokens=additional_tokens,
-                                           **kwargs)
-        self.num_symbols = num_symbols
-        self.min_frequency = min_frequency
-        self.total_symbols = total_symbols
-        self.separator = separator
-        self.file_prefix = '/data/vchordia/LegalData/wmt16_de_en/train.tok.clean.moses_pretok.bpe.32000.shared-de_en.codes'
-        self.vocab_file = self._vocab_filename(self.file_prefix)
+# class BPETokenizer:
+#     def __init__(self,file_prefix,
+#                  additional_tokens,
+#                  num_symbols,
+#                  total_symbols,
+#                  min_frequency,
+#                  separator,
+#                  **kwargs):
+#         super(BPETokenizer, self).__init__(file_prefix=file_prefix,
+#                                            additional_tokens=additional_tokens,
+#                                            **kwargs)
+#         self.num_symbols = num_symbols
+#         self.min_frequency = min_frequency
+#         self.total_symbols = total_symbols
+#         self.separator = separator
+#         self.file_prefix = '/data/vchordia/LegalData/wmt16_de_en/train.tok.clean.moses_pretok.bpe.32000.shared-de_en.codes'
+#         self.vocab_file = self._vocab_filename(self.file_prefix)
         # self.codes_file = '{}.codes'.format(self.file_prefix)
         # if os.path.isfile(self.codes_file):
         #     self.set_bpe(self.codes_file)
 
+    # def set_bpe(self, codes_file):
+    #     with codecs.open(self.codes_file, encoding='UTF-8') as codes:
+    #         self.bpe = ab.BPE(codes, separator=self.separator)
 
-    def
+class Tokenizer(object):
+
+    def __init__(self,file_prefix=None, additional_tokens=None, use_moses=None):
+        self.special_tokens = [PAD_TOKEN, UNK_TOKEN, BOS_TOKEN, EOS_TOKEN]
+        if file_prefix is not None:
+            self.vocab_file = self._vocab_filename(file_prefix)
+
+
 
 class SentencePiece(object):
 
@@ -119,6 +129,8 @@ class CharTokenizer:
 
     def detokenize(self, inputs, delimiter=u''):
         return super(CharTokenizer, self).detokenize(inputs, delimiter)
+
+
 
 
 
